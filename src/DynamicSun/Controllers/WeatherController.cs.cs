@@ -25,19 +25,12 @@ namespace DynamicSun.Controllers
 
         private async Task<List<WeatherData>> GetWeatherDataByMonthAndYear(int month, int year)
         {
+            var weatherDataQuery = _dbContext.WeatherData.AsQueryable();
+
             if (month == -1 && year == -1)
             {
                 return new List<WeatherData>();
             }
-
-            var weatherData = await QueryWeatherData(month, year);
-            return weatherData;
-        }
-
-        private async Task<List<WeatherData>> QueryWeatherData(int month, int year)
-        {
-            var weatherDataQuery = _dbContext.WeatherData.AsQueryable();
-
             if (month != -1 && year != -1)
             {
                 weatherDataQuery = weatherDataQuery.Where(data => data.Month == month && data.Year == year);
