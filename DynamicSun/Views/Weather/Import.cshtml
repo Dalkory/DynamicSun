@@ -1,0 +1,13 @@
+﻿<link href="../css/site.css" rel="stylesheet">
+
+@{
+    ViewData["Title"] = "Загрузка файлов";
+}
+
+<div class="import-wrapper">
+    <form class="import-form" method="post" asp-controller="Weather" asp-action="Import" enctype="multipart/form-data">
+        <label for="fileInput">Выберите файл(-ы) для загрузки</label>
+        <input type="file" multiple name="files" id="fileInput" />
+        <button class="btn submit-btn" type="submit" name="Upload">Загрузить</button>
+    </form>
+</div>

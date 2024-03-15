@@ -1,0 +1,66 @@
+﻿@model List<DynamicSun.Models.WeatherData>
+@{
+    ViewData["Title"] = "Просмотр архивов";
+}
+
+<div class="view-archives-wrapper">
+    <h2>Выберите месяц или год для просмотра погоды</h2>
+
+    <div class="view-form-wrapper">
+        <form class="form-wrapper" method="get" asp-controller="Weather" asp-action="Index">
+            <div class="form-input-wrapper">
+                <div class="form-input-item">
+                    <label for="monthInput">Месяц</label>
+                    <input type="number" name="month" id="monthInput" />
+                </div>
+                <div class="form-input-item">
+                    <label for="yearInput">Год</label>
+                    <input type="number" name="year" id="yearInput" />
+                </div>
+            </div>
+            <button class="btn submit-btn" type="submit" name="Upload">Применить</button>
+        </form>
+    </div>
+
+    <table class="weather-table">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Температура воздуха</th>
+                <th>Относительная влажность</th>
+                <th>Точка росы</th>
+                <th>Атмосферное давление</th>
+                <th>Направление ветра</th>
+                <th>Скорость ветра</th>
+                <th>Облачность</th>
+                <th>Нижняя граница облачности</th>
+                <th>Видимость</th>
+                <th>Погодные явления</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var weatherData in Model)
+            {
+                <tr>
+                    @{
+                        var day = weatherData.Day.ToString("00");
+                        var month = weatherData.Month.ToString("00");
+                    }
+                    <td>@($"{day}.{month}.{weatherData.Year}")</td>
+                    <td>@weatherData.Time</td>
+                    <td>@weatherData.Temperature</td>
+                    <td>@weatherData.RelativeHumidity</td>
+                    <td>@weatherData.TemperatureDew</td>
+                    <td>@weatherData.AtmosphericPressure</td>
+                    <td>@weatherData.WindDirection</td>
+                    <td>@weatherData.WindSpeed</td>
+                    <td>@weatherData.CloudCover</td>
+                    <td>@weatherData.CloudBase</td>
+                    <td>@weatherData.Visibility</td>
+                    <td>@weatherData.WeatherPhenomena</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
